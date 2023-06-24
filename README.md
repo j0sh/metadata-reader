@@ -1,15 +1,24 @@
+## Transfix Image Metadata Reader
+
+Fastest and most secure image metadata reader on the Internet
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+This repo uses Nixkpgs / [nix-shell](shell.nix).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# open up the nix-shell which contains all dependencies
+
+nix-shell
+# emscripten will build exiv2 the first time the shell is initialized
+
+# build the JS for the metadata reader
+make
+
+# start the development server
+make dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -27,8 +36,17 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+make build
+# Static build artifacts will be in the `out` folder.
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The build artifacts are checked into a repo (link!) which is deployed into Cloudflare Pages. Builds are done locally due to emscripten (which would be too slow for CI) and the artifacts placed in a separate repo because the emscripten output is quite large - 3.4 MB as of this writing.
+
+## Todo
+
+- [ ] Slim down emscripten build - currently 3.4 MB
+- [ ] JSON download of metadata
+- [ ] CSV download of metadata
