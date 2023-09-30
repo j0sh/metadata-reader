@@ -1,5 +1,6 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import GoogleAnalytics from "./GoogleAnalytics";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <GoogleAnalytics GA_TRACKING_ID="G-6XNS6TFL9X" />
       <body className={inter.className}>{children}</body>
     </html>
   )
