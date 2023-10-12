@@ -3,6 +3,7 @@
 # transfix
 /.emcache/
 reader.js
+/deploy/
 
 
 # dependencies
